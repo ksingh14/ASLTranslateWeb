@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+
+
+
+
+<html>
+  <head>
+      <title>ASL Signbank</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/ASL/main.css">
+
+    <link rel="stylesheet" href="/static/css/minimalistic_language_picker.css">
+
+    <link rel="icon" type="image/png" href="/static/images/favicon.png">
+
+    
+  </head>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112012037-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-112012037-1');
+  </script>
+
+  <body>
+
+  
+
+
+<!-- This was commented out, WEBSITE_LANGUAGE is already defined in baselayout.html -->
+<!---->
+
+<style>
+  #affix-bar.affix {
+    position:fixed;
+    top: 0;
+    z-index: 1000 !important;
+    background: white;
+  }
+</style>
+
+<div id="signbank-bar" class="navbar navbar-fixed-top" style="box-sizing:content-box;">
+
+<div id='header' class="navbar-header">
+    <h1>ASL <br/><span id="second-title-part">signbank</span></h1>
+</div>
+
+<div id='navbar-menus' class="collapse navbar-collapse navbar-upper navbar-default" role="navigation" style="display:inline;box-sizing:content-box;padding:0;">
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="nav navbar-upper" id="menu-pull-downs" style="display:inline;padding-left:0px;box-sizing:content-box;">
+
+    <nav class="nav navbar-upper">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#signbank-menus">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+    <div class="collapse navbar-collapse" id="signbank-menus">
+    <ul class="nav navbar-left navbar-nav" style="margin-left:15px;box-sizing:content-box;">
+    
+    
+
+        
+        <li><a style="padding-left: 0px;" href="/">
+            
+                 Home
+              
+        </a></li>
+      
+    
+
+        
+        <li class='dropdown'>
+             <a href="/about/"  class="dropdown-toggle" data-toggle="dropdown">
+              
+                 About
+              
+                 <b class="caret"></b></a>
+             <ul class="dropdown-menu">
+             
+                <li ><a href="/about/copyright/">
+              
+                 Copyright
+              
+                </a></li>
+             
+                <li ><a href="/about/manual/">
+              
+                 Manual
+              
+                </a></li>
+             
+                <li ><a href="/about/conditions/">
+              
+                 Conditions of use
+              
+                </a></li>
+             
+                <li ><a href="/about/contact/">
+              
+                 Contact us
+              
+                </a></li>
+             
+                <li ><a href="/about/FAQs/">
+              
+                 FAQs
+              
+                </a></li>
+             
+             </ul>
+        </li>
+      
+    
+
+        
+        <li class='dropdown'>
+             <a href="/signs/"  class="dropdown-toggle" data-toggle="dropdown">
+              
+                 Signs
+              
+                 <b class="caret"></b></a>
+             <ul class="dropdown-menu">
+             
+                <li ><a href="/signs/search/">
+              
+                 Search
+              
+                </a></li>
+             
+                <li ><a href="/signs/show_all/">
+              
+                 Show all signs
+              
+                </a></li>
+             
+                <li ><a href="/signs/recently_added/">
+              
+                 Recently added signs
+              
+                </a></li>
+             
+                <li ><a href="/signs/proposed_new/">
+              
+                 Proposed new signs
+              
+                </a></li>
+             
+             </ul>
+        </li>
+      
+    
+
+        
+        <li class='dropdown'>
+             <a href="/feedback/"  class="dropdown-toggle" data-toggle="dropdown">
+              
+                 Feedback
+              
+                 <b class="caret"></b></a>
+             <ul class="dropdown-menu">
+             
+                <li ><a href="/feedback/site/">
+              
+                 Site feedback
+              
+                </a></li>
+             
+                <li ><a href="/feedback/missing/">
+              
+                 Report a missing sign
+              
+                </a></li>
+             
+             </ul>
+        </li>
+      
+    
+
+        
+        <li class='dropdown'>
+             <a href="/analysis/"  class="dropdown-toggle" data-toggle="dropdown">
+              
+                 Analysis
+              
+                 <b class="caret"></b></a>
+             <ul class="dropdown-menu">
+             
+                <li ><a href="/analysis/homonyms/">
+              
+                 Homonym list
+              
+                </a></li>
+             
+             </ul>
+        </li>
+      
+    
+
+    </ul>
+    <form class="navbar-form navbar-left" role="search" id="frmSearch" name="frmSearch" method="get" action="/signs/search">
+            <div class="text-container hasTooltip"><input class='form-control' placeholder='Search gloss' type="Text" name="search" id="tooltip-search"
+                                               onfocus="focusFunction()" onblur="blurFunction()"
+                                               value="" maxlength="60" size="36" />
+                <span>In many text fields, you can use patterns as follows:
+                  <table>
+                    <tr>
+                        <td align='right'>A</td><td>&nbsp;&nbsp;</td><td align='left'>contains A</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>^A</td><td>&nbsp;&nbsp;</td><td align='left'>starts with A</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>A$</td><td>&nbsp;&nbsp;</td><td align='left'>ends with A</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>A|B</td><td>&nbsp;&nbsp;</td><td align='left'>A or B</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>.*</td><td>&nbsp;&nbsp;</td><td align='left'>find all strings in this field</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>(</td><td>&nbsp;&nbsp;</td><td align='left'>use backslash to find <br/>special characters in field</td>
+                    </tr>
+                  </table>
+                </span>
+            </div>
+            <div class="text-container hasTooltip"><input class='form-control' placeholder='Search translation' type="Text" name="keyword" id="tooltip-translation"
+                                               onfocus="focusFunction2()" onblur="blurFunction2()"
+                                               value="" maxlength="60" size="36" />
+                <span>In many text fields, you can use patterns as follows:
+                  <table>
+                    <tr>
+                        <td align='right'>A</td><td>&nbsp;&nbsp;</td><td align='left'>contains A</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>^A</td><td>&nbsp;&nbsp;</td><td align='left'>starts with A</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>A$</td><td>&nbsp;&nbsp;</td><td align='left'>ends with A</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>A|B</td><td>&nbsp;&nbsp;</td><td align='left'>A or B</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>.*</td><td>&nbsp;&nbsp;</td><td align='left'>find all strings in this field</td>
+                    </tr>
+                    <tr>
+                        <td align='right'>(</td><td>&nbsp;&nbsp;</td><td align='left'>use backslash to find <br/>special characters in field</td>
+                    </tr>
+                  </table>
+                </span>
+            </div>
+          <button class='invisible_button' type='submit'><img id='mag-glass' src='/static/images/global/search_icon.svg'></button>
+    </form>
+
+      <div class="nav navbar-right" style="height: 10px;box-sizing:content-box;">
+        
+            <div class='navbar-text'>
+                <a id="username_link" href="/logout.html">Logout (Kunal Singh)</a></div>
+        
+      </div>
+    </div>
+    </div>
+  </nav>
+
+  </div>
+
+</div>
+
+<div id='navbar-datasets' class="navbar-left navbar-lower" style="background:white;box-sizing:content-box;">
+    <div class="nav navbar-left" style="min-height:35px;margin-bottom:3px;box-sizing:content-box;">
+    </div>
+
+</div>
+<div id='bslstripe'></div>
+
+</div>
+
+
+    <div id='wrap' class="container-fluid" style="box-sizing:content-box;background:white;">
+
+        
+
+
+
+        <div role='main' id="maincontent" style="background:white;">
+        
+
+<p>The requested page was not found on the server. Please use
+the menu above to navigate to another part of the site. 
+If you continue to experience problems, please contact
+the webmaster at <a href="mailto:o.crasborn@let.ru.nl">o.crasborn@let.ru.nl</a>.</p>
+
+
+        </div>
+        
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+        <div class='pull-right'>
+              <a href="/feedback/generalfeedback.html?return=/dictionary/protected_media/glossvideo/ASL/SN/SNEEZE-2466.mp4//">Provide feedback on the site</a>
+        </div>
+        </div>
+    </footer>
+    
+    <script src='/static/js/jquery-1.11.0.min.js'></script>
+    <script src='/static/bootstrap/js/bootstrap.min.js'></script>
+    <script type="text/javascript" src="/static/js/minimalistic_language_picker.js"></script>
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf-8" src="/static/js/jquery.dataTables.min.js"></script>
+
+    
+
+    <script type="text/javascript">
+        function focusFunction() {
+            var search_text = document.getElementById("tooltip-search").value;
+            if (!search_text) {
+                document.getElementById("tooltip-search").style.background = "lightgray";
+            }
+        }
+        function focusFunction2() {
+            var search_text = document.getElementById("tooltip-translation").value;
+            if (!search_text) {
+                document.getElementById("tooltip-translation").style.background = "lightgray";
+            }
+        }
+        function blurFunction() {
+            document.getElementById("tooltip-search").style.background = "white";
+        }
+        function blurFunction2() {
+            document.getElementById("tooltip-translation").style.background = "white";
+        }
+    </script>
+
+    <script type="text/javascript">
+    $(window).ready(function()
+    {
+
+        
+
+        //Use the form below to update the language when logging in (if needed)
+        
+
+        $('#minimalistic_language_picker').minimalistic_language_picker(['en','nl','zh-hans'],'en-us','/static/images/languages/',function(chosen_language)
+        {
+            
+
+                //When the user is logged in, we don't want to submit the form, but instead save
+                //the user preference and reload
+
+                $.ajax('/dictionary/switch_to_language/'+chosen_language,'html');
+
+                //The reload is on a timeout, because it happened too fast on Firefox
+                setTimeout(function()
+                {
+                    $("#change_language_input_field").val(chosen_language);
+                    $("#change_language_form").submit();
+
+                },500);
+
+            
+
+        });
+        navbarHeight = Math.round($('#signbank-bar').outerHeight());
+        $('#wrap').css({'padding-top': navbarHeight});
+        $('[data-toggle="tooltip-menubar"]').tooltip();
+    })
+
+    $(window).on('resize', function() {
+        navbarHeight3 = Math.round($('#signbank-bar').height());
+        $('#searchresults').css({'top': navbarHeight3 });
+        $('#signinfo').css({'top': navbarHeight3 + Math.round($('#searchresults').height())});
+        $('#wrap').css({'padding-top': navbarHeight3 });
+    })
+
+    </script>
+
+    <form id="change_language_form" method="post" action="/i18n/setlang/">
+        <input type='hidden' name='csrfmiddlewaretoken' value='9DD2npFItLp1Yy30OWeKMVoRW2lAaC5fxmbahlnbZUCWGPJS418uadyMS9KvcF11' />
+        <input id="change_language_input_field" type="hidden" name="language" value="en-us">
+
+    </form>
+
+  </body>
+</html>
+
