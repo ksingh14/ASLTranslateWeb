@@ -16,6 +16,7 @@ import axios from 'axios'
 import '../Styles/Home.css';
 import ReactPlayer from 'react-player'
 import { ArcherContainer, ArcherElement } from "react-archer";
+import { AudioRecorder } from 'react-audio-voice-recorder';
 
 interface props {
   // pred_text: string
@@ -25,7 +26,7 @@ interface props {
 export default function Home({ }: props) {
   let isLargeScreen = useMediaQuery('(min-width:450px')
   const [inputs, setInputs] = useState({
-    input_text: "",
+    text: "",
   });
   const [output, setOutput] = useState({
     pred: "",
@@ -78,6 +79,28 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
     }
   }
 
+  const transcriptionCall = async (blob: any) => {
+    try {
+      let config = {
+        headers: {
+          // TODO: replace TOKEN with secret
+          "Authorization": "Bearer <TOKEN>",
+          "Content-Type": "multipart/form-data"
+        }
+      }    
+      const form = new FormData();
+      form.append('model', 'whisper-1');
+      form.append('file', blob, 'myTrainingFile.webm');
+      const urlTranscribe = 'https://api.openai.com/v1/audio/transcriptions'
+      const { data } = await axios.post(urlTranscribe, form, config)
+      console.log(data)
+      setInputs(data)
+      apiCall(data.text);
+    } catch (err:any) {
+      console.log(err)
+    }
+  }
+
   const handleChange = (e: React.ChangeEvent<any>) => {
     setInputs((prevState) => ({
       ...prevState,
@@ -88,10 +111,24 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
   const handleSubmit = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
     console.log(inputs)
-    apiCall(inputs.input_text)
+    apiCall(inputs.text)
     // 2nd API call helps fix the arrows (otherwise they can get messed up)
-    apiCall(inputs.input_text)
+    apiCall(inputs.text)
   }
+
+  const addAudioElement = async (blob: any) => {
+    // const url = URL.createObjectURL(blob);
+    // const audio = document.createElement("audio");
+    // audio.src = url;
+    // audio.controls = true;
+    // document.body.appendChild(audio);
+    // console.log(url);
+
+    transcriptionCall(blob);
+
+    // var FileSaver = require('file-saver');
+    // FileSaver.saveAs(blob, "voice.webm");
+  };
 
   return (
     <Box 
@@ -111,13 +148,14 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
           textTransform="uppercase">
           {name}
         </Typography> */}
+        <AudioRecorder onRecordingComplete={addAudioElement} />
         <Typography variant={isLargeScreen ? 'h3' : 'h4'}>
           Enter your text!
         </Typography>
         <div>
           <form onSubmit={handleSubmit} >
             <TextField id="outlined-basic" variant="outlined" color="secondary"
-                    value={inputs.input_text} name="input_text" onChange={handleChange}
+                    value={inputs.text} name="text" onChange={handleChange}
                     focused
                     sx={{
                       "& .MuiInputBase-root": {
