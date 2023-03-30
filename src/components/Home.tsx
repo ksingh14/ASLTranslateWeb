@@ -15,7 +15,7 @@ import {
 import axios from 'axios'
 import '../Styles/Home.css';
 import ReactPlayer from 'react-player'
-import { ArcherContainer, ArcherElement } from "react-archer";
+import { ArcherContainer, ArcherElement, ArcherContainerRef } from "react-archer";
 import { AudioRecorder } from 'react-audio-voice-recorder';
 
 interface props {
@@ -28,16 +28,20 @@ export default function Home({ }: props) {
   const [inputs, setInputs] = useState({
     text: "",
   });
-  const [output, setOutput] = useState({
+  const initialOutput = {
     pred: "",
     pred_list: [
 
     ],
+  }
+  const initialOutputLinks = {
     links: [{
       gloss: "",
       link: "",
     }],
-  });
+  }
+  const [output, setOutput] = useState(initialOutput);
+  const [outputLinks, setOutputLinks] = useState(initialOutputLinks);
 
   // Arrow stuff
   const rootStyle = { display: "flex", justifyContent: "center" };
@@ -47,13 +51,17 @@ export default function Home({ }: props) {
     justifyContent: "space-between",
   };
 
-const boxStyle = { padding: "10px", border: "1px solid black" };
+  const boxStyle = { padding: "10px", border: "1px solid black" };
+
+  const archer = React.createRef<ArcherContainerRef>() 
 
   const apiCall = async (input: string) => {
     try {
      //const url = 'http://localhost:8080/translate/text'
      const url = 'http://localhost:8080/translate/text/ncslgr_use_dict_add_word'
       const { data } = await axios.post(url, { 'sentence': input })
+      setOutputLinks(data)
+      await sleep(100);
       setOutput(data)
       console.log(data)
 
@@ -112,9 +120,12 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
     e.preventDefault();
     console.log(inputs)
     apiCall(inputs.text)
-    // 2nd API call helps fix the arrows (otherwise they can get messed up)
-    apiCall(inputs.text)
+    // if (archer.current) {
+    //   archer.current.refreshScreen()
+    // }
   }
+
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
   const addAudioElement = async (blob: any) => {
     // const url = URL.createObjectURL(blob);
@@ -176,7 +187,7 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
           </form>
         </div>
         </Grid>
-        <ArcherContainer strokeColor="red">
+        <ArcherContainer strokeColor="red" ref={archer}>
         {
           output.pred_list.map(item => (
             <ArcherElement
@@ -220,7 +231,7 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
           <Grid container wrap='nowrap' style={{ gap: 5 }}>
             {/* And here I render the box array */}
             {
-              output.links.map(item => (
+              outputLinks.links.map(item => (
                 <div>
                   <ArcherElement id={item.gloss + "link"}>
                     <Typography
