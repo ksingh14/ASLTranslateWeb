@@ -148,10 +148,13 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
           textTransform="uppercase">
           {name}
         </Typography> */}
-        <AudioRecorder onRecordingComplete={addAudioElement} />
         <Typography variant={isLargeScreen ? 'h3' : 'h4'}>
-          Enter your text!
+          Say something, or type something!
         </Typography>
+        <Grid container wrap='nowrap' style={{ gap: 5 }}
+  alignItems="center"
+  justifyContent="center">
+        <AudioRecorder onRecordingComplete={addAudioElement}/>
         <div>
           <form onSubmit={handleSubmit} >
             <TextField id="outlined-basic" variant="outlined" color="secondary"
@@ -161,13 +164,18 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
                       "& .MuiInputBase-root": {
                           color: 'primary.main',
                           width: 400,
-                          margin: 2
+                          mt: 2,
+                          mr: 2,
+                          ml: 4,
+                          mb: 2,
+                         //fontSize: 28
                       }
                     }}      
               />
-            <Button type='submit' variant="contained" sx = {{margin: 3}} >Submit</Button>
+            <Button type='submit' variant="contained" sx = {{mt: 3}} >Submit</Button>
           </form>
         </div>
+        </Grid>
         <ArcherContainer strokeColor="red">
         {
           output.pred_list.map(item => (
@@ -186,6 +194,7 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
               display="inline" 
               align="center" 
               variant="subtitle1" 
+              //variant='h4'
               textTransform="capitalize" 
               sx = {{
                 margin: 0.3
@@ -218,6 +227,7 @@ const boxStyle = { padding: "10px", border: "1px solid black" };
                       display="inline"
                       align="center"
                       variant="subtitle1"
+                      //variant='h4'
                       textTransform="capitalize"
                       paragraph>
                       {item.gloss}
